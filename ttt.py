@@ -12,6 +12,8 @@ def field_creation(x):
         lines_prepare.append(rows)
     return lines_prepare
 
+def win_conditions()
+
 
 field_size = 3
 
