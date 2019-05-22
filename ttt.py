@@ -1,3 +1,5 @@
+#TocTacToe by Somnor and Demo
+
 import os
 
 
@@ -92,7 +94,7 @@ while True:
                    (field[0][2] == field[1][2] == field[2][2] == "O") or
                    (field[0][2] == field[1][1] == field[2][0] == "O") or
                    (field[0][0] == field[1][1] == field[2][2] == "O")):
-                    print("\nPlayer2 won the game!\n")
+                    print("\nPlayer2 wonthe game!\n")
                     break
                 player = 1
         except IndexError:
