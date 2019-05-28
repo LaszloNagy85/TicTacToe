@@ -2,6 +2,15 @@
 
 import os
 
+def numbers_on_fields(values): 
+    os.system('cls||clear')   
+    print("Tic Tac Toe\n\n  1   2   3\n1 {0} | {1} | {2}\n  ------"
+                      "---\n2 {3} | {4} | {5}\n  ---------\n3 {6} | {7} | {8}\n"
+                      .format(field[0][0], field[1][0], field[2][0],
+                              field[0][1], field[1][1], field[2][1],
+                              field[0][2], field[1][2], field[2][2]))
+
+    return 
 
 def field_creation(x):
     lines_prepare = []
@@ -12,23 +21,20 @@ def field_creation(x):
         lines_prepare.append(rows)
     return lines_prepare
 
-def win_conditions()
+#def win_conditions():
 
 
 field_size = 3
 
 while True:
-    os.system('cls||clear')
     field = []
     field = field_creation(field_size)
     player = 1
     a = ""
     b = ""
-    print("Tic Tac Toe\n\n  1   2   3\n1 {0} | {1} | {2}\n  ---------\n2 "
-          "{3} | {4} | {5}\n  ---------\n3 {6} | {7} | {8}\n"
-          .format(field[0][0], field[1][0], field[2][0],
-                  field[0][1], field[1][1], field[2][1],
-                  field[0][2], field[1][2], field[2][2]))
+
+    numbers_on_fields(field)
+
     while True:
         try:
             if player == 1:
@@ -47,13 +53,8 @@ while True:
                 if field[a][b] == "X" or field[a][b] == "O":
                     print("already occupied, try other one")
                     continue
-                os.system('cls||clear')
                 field[a][b] = "X"
-                print("Tic Tac Toe\n\n  1   2   3\n1 {0} | {1} | {2}\n  ------"
-                      "---\n2 {3} | {4} | {5}\n  ---------\n3 {6} | {7} | {8}\n"
-                      .format(field[0][0], field[1][0], field[2][0],
-                              field[0][1], field[1][1], field[2][1],
-                              field[0][2], field[1][2], field[2][2]))
+                numbers_on_fields(field)
                 if ((field[0][0] == field[0][1] == field[0][2] == "X") or
                    (field[1][0] == field[1][1] == field[1][2] == "X") or
                    (field[2][0] == field[2][1] == field[2][2] == "X") or
@@ -81,13 +82,8 @@ while True:
                 if field[a][b] == "X" or field[a][b] == "O":
                     print("already occupied, try other one")
                     continue
-                os.system('cls||clear')
                 field[a][b] = "O"
-                print("Tic Tac Toe\n\n  1   2   3\n1 {0} | {1} | {2}\n  ------"
-                      "---\n2 {3} | {4} | {5}\n  ---------\n3 {6} | {7} | {8}\n"
-                      .format(field[0][0], field[1][0], field[2][0],
-                              field[0][1], field[1][1], field[2][1],
-                              field[0][2], field[1][2], field[2][2]))
+                numbers_on_fields(field)
                 if ((field[0][0] == field[0][1] == field[0][2] == "O") or
                    (field[1][0] == field[1][1] == field[1][2] == "O") or
                    (field[2][0] == field[2][1] == field[2][2] == "O") or
