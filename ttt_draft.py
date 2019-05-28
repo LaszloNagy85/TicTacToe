@@ -1,4 +1,4 @@
-#TocTacToe by Somnor and Demo
+# TocTacToe by Somnor and Demo
 
 import os
 
@@ -13,11 +13,21 @@ def field_creation(x):
     return lines_prepare
 
 
+def numbers_on_fields(values):
+    os.system('cls||clear')
+    print("Tic Tac Toe\n\n  1   2   3\n1 {0} | {1} | {2}\n  ------"
+          "---\n2 {3} | {4} | {5}\n  ---------\n3 {6} | {7} | {8}\n"
+          .format(field[0][0], field[1][0], field[2][0],
+                  field[0][1], field[1][1], field[2][1],
+                  field[0][2], field[1][2], field[2][2]))
+    return
+
+
 def player_input(field_list, player):
     while True:
         try:
-            a = int(input(f"Player{player} Give the x coordinate:"))-1
-            b = int(input(f"Player{player} Give the y coordinate:"))-1
+            a = int(input(f"Player {player} give the x coordinate:"))-1
+            b = int(input(f"Player {player} give the y coordinate:"))-1
             if a < 0 or b < 0:
                 print("Please use valid coordinates.")
                 continue
@@ -36,33 +46,19 @@ def player_input(field_list, player):
     return field_list
 
 
-
-#def win_conditions()
+# def win_conditions(field, a, b, player)
 
 
 field_size = 3
 
 while True:
-    os.system('cls||clear')
-    field = []
     field = field_creation(field_size)
     player = 1
-    a = ""
-    b = ""
-    print("Tic Tac Toe\n\n  1   2   3\n1 {0} | {1} | {2}\n  ---------\n2 "
-          "{3} | {4} | {5}\n  ---------\n3 {6} | {7} | {8}\n"
-          .format(field[0][0], field[1][0], field[2][0],
-                  field[0][1], field[1][1], field[2][1],
-                  field[0][2], field[1][2], field[2][2]))
+    numbers_on_fields(field)
     while True:
         if player == 1:
             field = player_input(field, player)
-            os.system('cls||clear')
-            print("Tic Tac Toe\n\n  1   2   3\n1 {0} | {1} | {2}\n  ------"
-                    "---\n2 {3} | {4} | {5}\n  ---------\n3 {6} | {7} | {8}\n"
-                    .format(field[0][0], field[1][0], field[2][0],
-                            field[0][1], field[1][1], field[2][1],
-                            field[0][2], field[1][2], field[2][2]))
+            numbers_on_fields(field)
             if ((field[0][0] == field[0][1] == field[0][2] == "X") or
                 (field[1][0] == field[1][1] == field[1][2] == "X") or
                 (field[2][0] == field[2][1] == field[2][2] == "X") or
@@ -71,17 +67,12 @@ while True:
                 (field[0][2] == field[1][2] == field[2][2] == "X") or
                 (field[0][0] == field[1][1] == field[2][2] == "X") or
                 (field[0][2] == field[1][1] == field[2][0] == "X")):
-                print("\nPlayer1 won the game!\n")
+                print("\nPlayer 1 won the game!\n")
                 break
             player = 2
         else:
             field = player_input(field, player)
-            os.system('cls||clear')
-            print("Tic Tac Toe\n\n  1   2   3\n1 {0} | {1} | {2}\n  ------"
-                    "---\n2 {3} | {4} | {5}\n  ---------\n3 {6} | {7} | {8}\n"
-                    .format(field[0][0], field[1][0], field[2][0],
-                            field[0][1], field[1][1], field[2][1],
-                            field[0][2], field[1][2], field[2][2]))
+            numbers_on_fields(field)
             if ((field[0][0] == field[0][1] == field[0][2] == "O") or
                 (field[1][0] == field[1][1] == field[1][2] == "O") or
                 (field[2][0] == field[2][1] == field[2][2] == "O") or
@@ -90,7 +81,7 @@ while True:
                 (field[0][2] == field[1][2] == field[2][2] == "O") or
                 (field[0][2] == field[1][1] == field[2][0] == "O") or
                 (field[0][0] == field[1][1] == field[2][2] == "O")):
-                print("\nPlayer2 won the game!\n")
+                print("\nPlayer 2 won the game!\n")
                 break
             player = 1
 
