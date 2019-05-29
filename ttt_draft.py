@@ -5,9 +5,9 @@ import os
 
 def field_creation(x):
     lines_prepare = []
-    for lines_counter in range(field_size):
+    for lines_counter in range(x):
         rows = []
-        for rows_counter in range(field_size):
+        for rows_counter in range(x):
             rows.append(" ")
         lines_prepare.append(rows)
     return lines_prepare
@@ -43,49 +43,83 @@ def player_input(field_list, player):
         field_list[a][b] = "X"
     elif player == 2:
         field_list[a][b] = "O"
-    return field_list
+    return [field_list, a, b]
 
 
-# def win_conditions(field, a, b, player)
+def win_conditions(field, a, b):
+    base_a = a
+    base_b = b
+    a = base_a - 2
+    for i in range(3):
+        try:
+            if a >= 0 and field[a][b] == field[a + 1][b] == field[a + 2][b]:
+                return True
+        except IndexError:
+            pass
+        a += 1
+    a = base_a
+    b = base_b - 2
+    for i in range(3):
+        try:
+            if b >= 0 and field[a][b] == field[a][b + 1] == field[a][b + 2]:
+                return True
+        except IndexError:
+            pass
+        b += 1
+    a = base_a - 2
+    b = base_b - 2
+    for i in range(3):
+        try:
+            if ((a >= 0 and b >= 0) and
+               field[a][b] == field[a + 1][b + 1] == field[a + 2][b + 2]):
+                return True
+        except IndexError:
+            pass
+        a += 1
+        b += 1
+    a = base_a - 2
+    b = base_b + 2
+    for i in range(3):
+        try:
+            if ((a >= 0 and b >= 0) and
+               field[a][b] == field[a + 1][b - 1] == field[a + 2][b - 2]):
+                return True
+        except IndexError:
+            pass
+        a += 1
+        b -= 1
+    return False
 
 
-field_size = 3
+field_size = 4
 
 while True:
     field = field_creation(field_size)
     player = 1
+    counter = 0
     numbers_on_fields(field)
-    while True:
+    while counter <= (field_size * field_size):
+        input_return = player_input(field, player)
+        field, a, b = input_return[0], input_return[1], input_return[2]
+        numbers_on_fields(field)
+        if win_conditions(field, a, b):
+            print(f"\nPlayer {player} won the game!\n")
+            break
         if player == 1:
-            field = player_input(field, player)
-            numbers_on_fields(field)
-            if ((field[0][0] == field[0][1] == field[0][2] == "X") or
-                (field[1][0] == field[1][1] == field[1][2] == "X") or
-                (field[2][0] == field[2][1] == field[2][2] == "X") or
-                (field[0][0] == field[1][0] == field[2][0] == "X") or
-                (field[0][1] == field[1][1] == field[2][1] == "X") or
-                (field[0][2] == field[1][2] == field[2][2] == "X") or
-                (field[0][0] == field[1][1] == field[2][2] == "X") or
-                (field[0][2] == field[1][1] == field[2][0] == "X")):
-                print("\nPlayer 1 won the game!\n")
-                break
             player = 2
         else:
-            field = player_input(field, player)
-            numbers_on_fields(field)
-            if ((field[0][0] == field[0][1] == field[0][2] == "O") or
-                (field[1][0] == field[1][1] == field[1][2] == "O") or
-                (field[2][0] == field[2][1] == field[2][2] == "O") or
-                (field[0][0] == field[1][0] == field[2][0] == "O") or
-                (field[0][1] == field[1][1] == field[2][1] == "O") or
-                (field[0][2] == field[1][2] == field[2][2] == "O") or
-                (field[0][2] == field[1][1] == field[2][0] == "O") or
-                (field[0][0] == field[1][1] == field[2][2] == "O")):
-                print("\nPlayer 2 won the game!\n")
-                break
             player = 1
+        counter += 1
+        if counter == (field_size * field_size):
+            break
+    if counter == (field_size * field_size):
+        if input("Draw game! Would you like a rematch y/n?  ") == "y":
+            continue
+        else:
+            break
 
-    if input("Would you like a rematch y/n?  ") == "y":
-        continue
-    else:
-        break
+    if counter < field_size * field_size:
+        if input("Would you like a rematch y/n?  ") == "y":
+            continue
+        else:
+            break
