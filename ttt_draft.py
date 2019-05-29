@@ -3,7 +3,8 @@
 import os
 
 
-def field_creation(x):
+def field_creation():
+    x = int(input("please give a field size:  "))
     lines_prepare = []
     for lines_counter in range(x):
         rows = []
@@ -14,7 +15,9 @@ def field_creation(x):
 
 
 def numbers_on_fields(values):
+      
     os.system('cls||clear')
+   
     print("Tic Tac Toe\n\n  1   2   3\n1 {0} | {1} | {2}\n  ------"
           "---\n2 {3} | {4} | {5}\n  ---------\n3 {6} | {7} | {8}\n"
           .format(field[0][0], field[1][0], field[2][0],
@@ -22,6 +25,8 @@ def numbers_on_fields(values):
                   field[0][2], field[1][2], field[2][2]))
     return
 
+#def expandables():
+  
 
 def player_input(field_list, player):
     while True:
@@ -94,7 +99,7 @@ def win_conditions(field, a, b):
 field_size = 4
 
 while True:
-    field = field_creation(field_size)
+    field = field_creation()
     player = 1
     counter = 0
     numbers_on_fields(field)
