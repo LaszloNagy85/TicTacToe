@@ -13,13 +13,15 @@ def field_creation(x):
     return lines_prepare
 
 
-def numbers_on_fields(values):
+
+def numbers_on_fields(values, field_size):
     os.system('cls||clear')
     print("Tic Tac Toe\n\n  1   2   3\n1 {0} | {1} | {2}\n  ------"
           "---\n2 {3} | {4} | {5}\n  ---------\n3 {6} | {7} | {8}\n"
           .format(field[0][0], field[1][0], field[2][0],
                   field[0][1], field[1][1], field[2][1],
                   field[0][2], field[1][2], field[2][2]))
+
     return
 
 
@@ -48,8 +50,6 @@ def player_input(field_list, player):
 
 # def win_conditions(field, a, b, player)
 
-
-field_size = 3
 
 while True:
     field = field_creation(field_size)

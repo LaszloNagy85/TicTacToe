@@ -1,7 +1,9 @@
 # TocTacToe by Somnor and Demo
 
 import os
-
+import colors
+print(colors.red('this is red'))
+print(colors.green('this is green'))
 
 def field_creation():
     x = int(input("please give a field size:  "))
@@ -13,11 +15,12 @@ def field_creation():
         lines_prepare.append(rows)
     return lines_prepare
 
-
 def numbers_on_fields(values):
       
     os.system('cls||clear')
    
+    for i in range(x):
+        print 
     print("Tic Tac Toe\n\n  1   2   3\n1 {0} | {1} | {2}\n  ------"
           "---\n2 {3} | {4} | {5}\n  ---------\n3 {6} | {7} | {8}\n"
           .format(field[0][0], field[1][0], field[2][0],
