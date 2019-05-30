@@ -4,35 +4,56 @@ import os
 
 
 def field_creation():
-    x = int(input("please give a field size:  "))
+    os.system('cls||clear')
+    while True:
+        x = int(input("Please choose a field size:  "))
+        if x < 3:
+            print("Please choose a number higher or equal to 3. Thanks")
+            continue
+        else:
+            break
     lines_prepare = []
     for lines_counter in range(x):
         rows = []
         for rows_counter in range(x):
             rows.append(" ")
         lines_prepare.append(rows)
-    return lines_prepare
+    return (lines_prepare, x)
 
 
-def numbers_on_fields(values):
-      
+def field_printing(values, x):
     os.system('cls||clear')
-   
-    print("Tic Tac Toe\n\n  1   2   3\n1 {0} | {1} | {2}\n  ------"
-          "---\n2 {3} | {4} | {5}\n  ---------\n3 {6} | {7} | {8}\n"
-          .format(field[0][0], field[1][0], field[2][0],
-                  field[0][1], field[1][1], field[2][1],
-                  field[0][2], field[1][2], field[2][2]))
+    print("Tic Tac Toe\n\n  ", end="")
+    for i in range(1, x+1):
+        print(f"{i}   ", end="")
+    print("")
+    for i in range(x):
+        print(i+1, end= "")
+        for j in range(x):
+            if values[j][i] == "X":
+                if j == x-1:
+                    print(f"\033[31m {values[j][i]}\33[37m", end="")
+                else:
+                    print(f"\033[31m {values[j][i]} \33[37m|", end="")
+            elif values[j][i] == "O":
+                if j == x-1:
+                    print(f"\033[32m {values[j][i]}\33[37m", end="")
+                else:
+                    print(f"\033[32m {values[j][i]} \33[37m|", end="")
+            else:
+                if j == x-1:
+                    print(f" {values[j][i]}", end="")
+                else:
+                    print(f" {values[j][i]} |", end="")
+        print("\n","----"*(x-1) + "---")
     return
 
-#def expandables():
-  
 
 def player_input(field_list, player):
     while True:
         try:
-            a = int(input(f"Player {player} give the x coordinate:"))-1
-            b = int(input(f"Player {player} give the y coordinate:"))-1
+            a = int(input(f"Player {player} give the x coordinate: "))-1
+            b = int(input(f"Player {player} give the y coordinate: "))-1
             if a < 0 or b < 0:
                 print("Please use valid coordinates.")
                 continue
@@ -45,7 +66,7 @@ def player_input(field_list, player):
             print("Please use valid(numbers) coordinates.")
             continue
     if player == 1:
-        field_list[a][b] = "X"
+        field_list[a][b] = ("X")
     elif player == 2:
         field_list[a][b] = "O"
     return [field_list, a, b]
@@ -96,35 +117,45 @@ def win_conditions(field, a, b):
     return False
 
 
-field_size = 4
-
-while True:
-    field = field_creation()
-    player = 1
-    counter = 0
-    numbers_on_fields(field)
-    while counter <= (field_size * field_size):
-        input_return = player_input(field, player)
-        field, a, b = input_return[0], input_return[1], input_return[2]
-        numbers_on_fields(field)
-        if win_conditions(field, a, b):
-            print(f"\nPlayer {player} won the game!\n")
-            break
-        if player == 1:
-            player = 2
-        else:
-            player = 1
-        counter += 1
-        if counter == (field_size * field_size):
-            break
-    if counter == (field_size * field_size):
+def endgame_check(counter, limit):
+    if counter == limit:
         if input("Draw game! Would you like a rematch y/n?  ") == "y":
-            continue
+            return True
         else:
-            break
+            return False
 
-    if counter < field_size * field_size:
+    if counter < limit:
         if input("Would you like a rematch y/n?  ") == "y":
+            return True
+        else:
+            return False
+
+
+def main():
+    while True:
+        field, field_size = field_creation()
+        limit = field_size * field_size
+        player = 1
+        counter = 0
+        field_printing(field, field_size)
+        while counter <= limit:
+            field, a, b = player_input(field, player)
+            field_printing(field, field_size)
+            if win_conditions(field, a, b):
+                print(f"\nPlayer {player} won the game!\n")
+                break
+            if player == 1:
+                player = 2
+            else:
+                player = 1
+            counter += 1
+            if counter == limit:
+                break
+        if endgame_check(counter, limit):
             continue
         else:
             break
+    return
+
+
+main()
