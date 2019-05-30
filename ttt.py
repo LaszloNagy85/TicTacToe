@@ -75,45 +75,84 @@ def player_input(field_list, player):
 def win_conditions(field, a, b):
     base_a = a
     base_b = b
-    a = base_a - 2
-    for i in range(3):
-        try:
-            if a >= 0 and field[a][b] == field[a + 1][b] == field[a + 2][b]:
-                return True
-        except IndexError:
-            pass
-        a += 1
-    a = base_a
-    b = base_b - 2
-    for i in range(3):
-        try:
-            if b >= 0 and field[a][b] == field[a][b + 1] == field[a][b + 2]:
-                return True
-        except IndexError:
-            pass
-        b += 1
-    a = base_a - 2
-    b = base_b - 2
-    for i in range(3):
-        try:
-            if ((a >= 0 and b >= 0) and
-               field[a][b] == field[a + 1][b + 1] == field[a + 2][b + 2]):
-                return True
-        except IndexError:
-            pass
-        a += 1
-        b += 1
-    a = base_a - 2
-    b = base_b + 2
-    for i in range(3):
-        try:
-            if ((a >= 0 and b >= 0) and
-               field[a][b] == field[a + 1][b - 1] == field[a + 2][b - 2]):
-                return True
-        except IndexError:
-            pass
-        a += 1
-        b -= 1
+    if len(field) == 3:
+        a = base_a - 2
+        for i in range(3):
+            try:
+                if a >= 0 and field[a][b] == field[a + 1][b] == field[a + 2][b]:
+                    return True
+            except IndexError:
+                pass
+            a += 1
+        a = base_a
+        b = base_b - 2
+        for i in range(3):
+            try:
+                if b >= 0 and field[a][b] == field[a][b + 1] == field[a][b + 2]:
+                    return True
+            except IndexError:
+                pass
+            b += 1
+        a = base_a - 2
+        b = base_b - 2
+        for i in range(3):
+            try:
+                if (a >= 0 and b >= 0) and field[a][b] == field[a + 1][b + 1] == field[a + 2][b + 2]:
+                    return True
+            except IndexError:
+                pass
+            a += 1
+            b += 1
+        a = base_a - 2
+        b = base_b + 2
+        for i in range(3):
+            try:
+                if (a >= 0 and b >= 0) and field[a][b] == field[a + 1][b - 1] == field[a + 2][b - 2]:
+                    return True
+            except IndexError:
+                pass
+            a += 1
+            b -= 1
+    else:
+        a = base_a - 3
+        for i in range(4):
+            try:
+                if a >= 0 and field[a][b] == field[a + 1][b] == field[a + 2][b] == field[a + 3][b]:
+                    return True
+            except IndexError:
+                pass
+            a += 1
+        a = base_a
+        b = base_b - 3
+        for i in range(4):
+            try:
+                if b >= 0 and field[a][b] == field[a][b + 1] == field[a][b + 2] == field[a][b + 3]:
+                    return True
+            except IndexError:
+                pass
+            b += 1
+        a = base_a - 3
+        b = base_b - 3
+        for i in range(4):
+            try:
+                if ((a >= 0 and b >= 0) and
+                   field[a][b] == field[a + 1][b + 1] == field[a + 2][b + 2] == field[a + 3][b + 3]):
+                    return True
+            except IndexError:
+                pass
+            a += 1
+            b += 1
+        a = base_a - 3
+        b = base_b + 3
+        for i in range(4):
+            try:
+                if ((a >= 0 and b >= 0) and
+                   field[a][b] == field[a + 1][b - 1] == field[a + 2][b - 2] == field[a + 3][b - 3]):
+                    return True
+            except IndexError:
+                pass
+            a += 1
+            b -= 1
     return False
 
 
